@@ -1,0 +1,7 @@
+.Welcome-page-main-container{
+    height: 800px;
+    width: 800px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

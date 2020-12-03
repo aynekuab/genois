@@ -1,0 +1,11 @@
+.SignIn-main-container{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 500px;
+    background-color: grey;
+}
+.welome-text{
+    color: orange;
+
+}
