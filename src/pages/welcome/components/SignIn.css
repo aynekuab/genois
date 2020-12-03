@@ -3,9 +3,24 @@
     flex-direction: column;
     height: 500px;
     width: 500px;
-    background-color: grey;
+  
 }
 .welome-text{
     color: orange;
 
+}
+.welcome-text-container{
+  margin-top: 20px;
+}
+.avatar-container{
+    display: flex;
+    justify-content: center;
+}
+.avatar{
+    height: 80px;
+    width: 80px;
+}
+.smt-button-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
