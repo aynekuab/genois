@@ -1,0 +1,15 @@
+.AddCard-container{
+    margin:10px;
+    width: 250px;
+    
+}
+.Add-link{
+    font-size: small;
+}
+.add-link-form{
+    display:flex;
+    flex-direction: column;
+    padding:20px;
+    justify-content: space-evenly;
+    padding-top:0;
+}

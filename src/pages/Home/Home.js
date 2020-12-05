@@ -10,7 +10,8 @@ import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import NotesIcon from '@material-ui/icons/Notes';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
-
+import Cards from './components/Card';
+import AddCard from './components/AddCard'
 export default function Home(props) {
   return (
     <div className="Home-container">
@@ -41,7 +42,8 @@ export default function Home(props) {
        
       </div>
       <div className = "display-section-container">
-          
+         <Cards></Cards>
+         <AddCard></AddCard>
       </div>
       </div>
     </div>
