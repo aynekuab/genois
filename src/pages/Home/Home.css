@@ -1,0 +1,14 @@
+.constraint{
+    height: 100px;
+    width:100px;
+
+}
+.side-drawer-container{
+    display: flex;
+    width: 200px;
+}
+.middle-section-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 1000px;
+}

@@ -1,0 +1,18 @@
+.Header-container{
+    display: flex;
+    flex-direction: column;
+   
+    width: 1000px
+}
+.user-name-intro{
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    justify-content: space-between;
+   
+}
+.button-navs{
+    display: flex;
+    align-items: center;
+   
+}
