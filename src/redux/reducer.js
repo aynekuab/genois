@@ -3,7 +3,7 @@ import {Actions} from './actions';
 const InitialState = {
     
     videos: [],
-    notes: [],
+    links: [],
     articles:[],
     musics: []
 }
@@ -18,6 +18,8 @@ export default function reducer (state=InitialState,action){
                 videos:action.payload,
                 isLoading:false
             };
+        case Action.DeleteVideo:
+            
         default:
         return  state;
     }
