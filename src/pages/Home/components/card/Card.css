@@ -1,6 +1,8 @@
 .Card-container{
-    width: 250px;
+    width: 200px;
     margin: 10px;
+    font-size: 1em;
+    max-height: 200px;
 }
 .img-sty{
     height:100px;

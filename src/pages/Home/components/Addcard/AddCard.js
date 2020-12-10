@@ -1,4 +1,4 @@
-import "../components/AddCard.css";
+import "./AddCard.css";
 import clsx from "clsx";
 import { useState } from "react";
 import CardHeader from "@material-ui/core/CardHeader";

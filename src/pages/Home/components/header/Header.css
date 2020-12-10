@@ -1,0 +1,44 @@
+.Header-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+}
+.user-name-intro{
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    justify-content: space-between;
+   
+}
+.button-navs{
+    display: flex;
+    align-items: center;
+   
+}
+.welcome-text{
+    background-color: #04499e;
+}
+.name{
+    font-family: monospace;
+    color: #f99820;  
+    margin-bottom: 10px;
+    margin-left:5px;
+}
+.genois-text{
+    font-family: monospace;
+    color: #f99820;
+    font-size: 3em;
+    margin-bottom: 0;
+}
+.user-name-intro{
+    border-bottom: 1px solid;
+    border-color: #04499e;
+}
+.second-text{
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 2px;
+    font-style: italic;
+    font-family: monospace;
+    color: rgb(253, 246, 246);
+}

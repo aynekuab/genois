@@ -1,50 +1,50 @@
 import "./Home.css";
-import Header from "./components/Header";
-import Drawer from "@material-ui/core/Drawer";
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import List from '@material-ui/core/List';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import NotesIcon from '@material-ui/icons/Notes';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import Cards from './components/Card';
-import AddCard from './components/AddCard'
+import Header from "./components/header/Header";
+
+import Button from "@material-ui/core/Button";
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList'
+import VideoLabelIcon from "@material-ui/icons/VideoLabel";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import NotesIcon from "@material-ui/icons/Notes";
+import MusicNoteIcon from "@material-ui/icons/MusicNote";
+import {Switch , Redirect, Route, Link} from 'react-router-dom';
+import AddCard from "./components/Addcard/AddCard";
+import {useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import {fetchVideos} from '../../redux/actions'
+import VideoCard from "./components/videocard/VideoCard";
+
+
 export default function Home(props) {
+  const todisplay_cards = useSelector((state) => state.videos);
+  const dispatch = useDispatch()
+  
+ 
+  // useEffect(() => {
+  //       dispatch(fetchVideos())
+  // },[dispatch]);
+  
   return (
     <div className="Home-container">
       <Header></Header>
-      <div className = "middle-section-container">
-      <div className="side-drawer-container">
-        
-         <Divider />
-        <List>
-        <ListItem button >
-              <ListItemIcon><VideoLabelIcon/></ListItemIcon>
-              <ListItemText primary="Videos" />
-        </ListItem>
-        <ListItem button >
-              <ListItemIcon><AssignmentIcon/></ListItemIcon>
-              <ListItemText primary="Article" />
-        </ListItem>
-        <ListItem button >
-              <ListItemIcon><NotesIcon/></ListItemIcon>
-              <ListItemText primary="Notes" />
-        </ListItem>
-        <ListItem button >
-              <ListItemIcon><MusicNoteIcon/></ListItemIcon>
-              <ListItemText primary="Music" />
-        </ListItem>
-       
-        </List> 
-       
-      </div>
-      <div className = "display-section-container">
-         <Cards></Cards>
-         <AddCard></AddCard>
-      </div>
+      <div className="middle-section-container">
+        <div className="side-drawer-container">
+         <MenuList>
+           <MenuItem component = {Link} to = "/videos">Videos</MenuItem>
+           <MenuItem>Links</MenuItem>
+           <MenuItem>Images</MenuItem>
+         </MenuList>
+      
+        </div>
+        <div className="display-section-container">
+          <Switch>
+            <Route path = "/videos">
+              <VideoCard></VideoCard>
+            </Route>
+          </Switch>
+           
+        </div>
       </div>
     </div>
   );

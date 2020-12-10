@@ -9,11 +9,12 @@ export default function Header(props) {
     <div className="Header-container">
       <div className="welcome-text">
         <h1 className="genois-text">Genois</h1>
+        <h2 className = "second-text">Your favorite links, all in one</h2>
       </div>
 
       <div className="user-name-intro">
         <div className="username">
-          <h1 className="name">HELLO, Abele</h1>
+          <h1 className="name">Hello, Abele</h1>
         </div>
         <div className="button-navs">
           <BottomNavigation showLabels className="buttons-nav-style">

@@ -1,17 +1,19 @@
 .constraint{
     height: 100px;
     width:100px;
-
 }
 .side-drawer-container{
     display: flex;
-    width: 200px;
+    
 }
 .middle-section-container{
     display: grid;
     grid-template-columns: 15% 85%;
-    height: 1000px;
+    
 }
 .display-section-container{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 900px;
 }
