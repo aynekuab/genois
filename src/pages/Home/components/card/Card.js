@@ -11,7 +11,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import LinkIcon from "@material-ui/icons/Link";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { deleteVideo } from "../../../../redux/actions";
 
 const useStyles = makeStyles({
   root: {
@@ -36,8 +38,14 @@ const useStyles = makeStyles({
 export default function Cards(props) {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  
   const [display, setDisplay] = useState(props.display);
 
+  const onDelete = () => {
+    dispatch(deleteVideo(display.data_id)); 
+  };
   return (
     <div className="Card-container">
       <Card className={classes.root}>
@@ -55,9 +63,9 @@ export default function Cards(props) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="delete">
+          <IconButton onClick={onDelete} aria-label="delete">
             <DeleteIcon />
-          </IconButton>
+          </IconButton >
           <IconButton onClick={() => window.location.href= display.link } arial-label="link">
             <LinkIcon />
           </IconButton>

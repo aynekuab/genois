@@ -7,6 +7,7 @@ export const Actions = Object.freeze({
 });
 
 function checkForErrors(response) {
+   console.log(response)
   if (!response) {
     throw Error(`${response.status}:${response.statusText}`);
   }
@@ -36,7 +37,7 @@ export function loadArticels(articels) {
 
 export function updateDeletedVideo(id) {
   return {
-    type: Action.UpdateDeletedVideo,
+    type: Actions.UpdateDeletedVideo,
     payload: id,
   };
 }
@@ -49,6 +50,7 @@ export function fetchVideos() {
       .then((response) => response.json())
       .then((data) => {
         if (data.ok) {
+          
           dispatch(loadVideos(data.videos));
         }
       })
@@ -59,17 +61,16 @@ export function fetchVideos() {
 }
 
 export function deleteVideo(id) {
+  
   const option = {
-    method: "DELETE",
+    method: "DELETE"
   };
   return (dispatch) => {
     fetch(`${hostvideo}/${id}`, option)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
-        if (data.ok) {
-          dispatch(updateUpdatedVideo(data.id));
-        }
+          dispatch(updateDeletedVideo(id));
       }).catch(error =>{
         console.log(error)
       });

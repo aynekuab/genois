@@ -1,24 +1,28 @@
 import "./VideoCard.css";
 import Card from "../card/Card";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchVideos } from "../../../../redux/actions";
+import { fetchVideos, deleteVideo } from "../../../../redux/actions";
 
 export default function VideoCard(props) {
   const videos = useSelector((state) => state.videos);
+  
+  
+
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(fetchVideos());
   }, [dispatch]);
+  
 
-  function onDelete(id){
-    deleteVideo(id)
-  }
+
   return (
     <div className="VideoCard-Container">
-      {
-        videos.map(item =>(<Card delete = {onDelete} display = {item}/>))
-      }
+      {videos.map((item) => (
+        <Card key={item.id}  display={item} />
+      ))}
     </div>
   );
 }
