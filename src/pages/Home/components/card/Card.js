@@ -40,12 +40,7 @@ export default function Cards(props) {
 
   const dispatch = useDispatch();
 
-  
   const [display, setDisplay] = useState(props.display);
-
-  const onDelete = () => {
-    dispatch(deleteVideo(display.data_id)); 
-  };
   return (
     <div className="Card-container">
       <Card className={classes.root}>
@@ -63,8 +58,8 @@ export default function Cards(props) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <IconButton onClick={onDelete} aria-label="delete">
-            <DeleteIcon />
+          <IconButton onClick ={() => props.remove(display.data_id)} aria-label="delete">
+            <DeleteIcon  />
           </IconButton >
           <IconButton onClick={() => window.location.href= display.link } arial-label="link">
             <LinkIcon />

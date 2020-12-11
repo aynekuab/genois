@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
+    duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
@@ -27,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddCard(props) {
   const classes = useStyles();
+  const  newrecord = {
+    header: "",
+    comment: "",
+    link: ""
+  }
+
+  const [record,setRecord] = useState(newrecord);
 
   const [expand, setExpand] = useState(false);
 
@@ -59,6 +66,9 @@ export default function AddCard(props) {
               label="Header"
               multiline
               rowsMax={4}
+              onChange={ e => {
+                setRecord({ ...record,header: e.target.value})
+              }}
               
             />
             <TextField
@@ -66,6 +76,9 @@ export default function AddCard(props) {
               label="link"
               placeholder="Link"
               multiline
+              onChange={ e => {
+                setRecord({...record,link: e.target.value})
+              }}
             />
             <TextField
               id="dis-textarea"
@@ -73,12 +86,16 @@ export default function AddCard(props) {
               multiline
               rows={4}
               placeholder ="Discription"
+              onChange={ e => {
+                setRecord({...record,comment: e.target.value})
+              }}
             />
             <Button
             type="submit"
             variant="contained"
             color="primary"
             size="medium"
+            onClick = {()=>props.add(record)}
           >
             Add
           </Button>

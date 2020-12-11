@@ -4,10 +4,11 @@ export const Actions = Object.freeze({
   LoadArticels: "LoadArticels",
   LoadLink: "LoadLink",
   UpdateDeletedVideo: "UpdateDeletedVideo",
+  UpdateAddingVideo:"UpdateAddingVideo"
 });
 
 function checkForErrors(response) {
-   console.log(response)
+  console.log(response)
   if (!response) {
     throw Error(`${response.status}:${response.statusText}`);
   }
@@ -41,6 +42,13 @@ export function updateDeletedVideo(id) {
     payload: id,
   };
 }
+export function UpdateAddingVideo(video){
+  return {
+    type:Actions.UpdateAddingVideo,
+    payload: video
+  }
+}
+
 const hostvideo = "http://localhost:3443/videos";
 
 export function fetchVideos() {
@@ -60,19 +68,39 @@ export function fetchVideos() {
   };
 }
 
-export function deleteVideo(id) {
+export function deleteVideo(data_id) {
   
   const option = {
     method: "DELETE"
   };
   return (dispatch) => {
-    fetch(`${hostvideo}/${id}`, option)
+    fetch(`${hostvideo}/${data_id}`, option)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
-          dispatch(updateDeletedVideo(id));
+          console.log(data_id)
+          dispatch(updateDeletedVideo(data_id));
       }).catch(error =>{
         console.log(error)
       });
   };
+}
+
+export function addVideo(video){
+  const option = {
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(video)
+  };
+    
+    return (dispatch) =>{
+      fetch(hostvideo,option)
+      .then(checkForErrors)
+      .then(response => response.json)
+      .then((data) =>{
+        dispatch(UpdateAddingVideo(video))
+      })
+    }
 }

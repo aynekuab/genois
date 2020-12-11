@@ -16,12 +16,6 @@ export default function Header(props) {
         <div className="username">
           <h1 className="name">Hello, Abele</h1>
         </div>
-        <div className="button-navs">
-          <BottomNavigation showLabels className="buttons-nav-style">
-            <BottomNavigationAction label="Histroy" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          </BottomNavigation>
-        </div>
       </div>
     </div>
   );

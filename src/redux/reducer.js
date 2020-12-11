@@ -12,20 +12,20 @@ export default function reducer(state = InitialState, action) {
     case Actions.LoadVideos:
       return {
         ...state,
-        notes: {},
-        articles: {},
-        musics: {},
+        articles: state.articles,
+        musics: state.musics,
         videos: action.payload,
         isLoadingvideo: false,
       };
     case Actions.UpdateDeletedVideo:
-      
       return {
-        
         ...state,
-        videos: state.videos.filter((video) => video.data_id !== action.payload.id)
+        videos: state.videos.filter((video) => video.data_id!== action.payload),
       };
-     
+    case Actions.UpdateAddingVideo:
+      return {
+        ...state,video: [action.payload,...state.videos]
+      }
     default:
       return state;
   }
