@@ -2,7 +2,7 @@ import "./VideoCard.css";
 import Card from "../card/Card";
 import { useEffect , useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchVideos, deleteVideo ,addVideo } from "../../../../redux/actions";
+import { fetchVideos, deleteVideo ,addVideo, likeVideo } from "../../../../redux/actions";
 import AddCard from '../../components/Addcard/AddCard'
 
 export default function VideoCard(props) {
@@ -15,20 +15,23 @@ export default function VideoCard(props) {
   const deleteCard = (data_id) => {
     dispatch(deleteVideo(data_id))
   }
-
+  
+  const likeCard = (data_id) =>{
+    dispatch(likeVideo(data_id))
+  }
   const addCard = (video) => {
     dispatch(addVideo(video))
   }
 
   useEffect(() => {
     dispatch(fetchVideos());
-  },[dispatch]);
+  },[dispatch,addCard]);
   
   
   return (
     <div className="VideoCard-Container">
       {videos.map((item) => (
-        <Card key={item.id}  remove = {deleteCard} display={item} />
+        <Card like ={likeCard}key={item.id}  remove = {deleteCard} display={item} />
       ))}
       <AddCard add ={addCard} />
     </div>

@@ -20,19 +20,22 @@ const useStyles = makeStyles({
     maxWidth: 150,
     maxHeight: 200,
   },
+  likeicon : {
+
+  },
   title: {
-    fontSize: 10
+    fontSize: 10,
   },
   header: {
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   content: {
-    paddingTop: 0 ,
-    paddingBottom: 0
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   actions: {
-    padding: 0
-  }
+    padding: 0,
+  },
 });
 
 export default function Cards(props) {
@@ -41,27 +44,44 @@ export default function Cards(props) {
   const dispatch = useDispatch();
 
   const [display, setDisplay] = useState(props.display);
+
+  const [is_fave, setIs_fave] = useState(display.is_favorite == 1);
+
+  let color = {}
+  if(is_fave){
+    color = {fill:"orange"}
+  }
   return (
     <div className="Card-container">
       <Card className={classes.root}>
-        <CardHeader className={classes.header}
+        <CardHeader
+          className={classes.header}
           title={<p className={classes.title}>{display.header}</p>}
           subheader={<p className={classes.title}>{display.created_at}</p>}
         />
-        
+
         <CardContent className={classes.content}>
           <Typography variant="body2" color="textSecondary" component="p">
             {display.comment}
           </Typography>
         </CardContent>
-        <CardActions className ={classes.actions} disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+        <CardActions className={classes.actions} disableSpacing>
+          <IconButton aria-label="add to favorites" onClick = {
+            () => {setIs_fave(!is_fave)
+                  props.like(display.data_id)}
+          }>
+            <FavoriteIcon style = {color} />
           </IconButton>
-          <IconButton onClick ={() => props.remove(display.data_id)} aria-label="delete">
-            <DeleteIcon  />
-          </IconButton >
-          <IconButton onClick={() => window.location.href= display.link } arial-label="link">
+          <IconButton
+            onClick={() => props.remove(display.data_id)}
+            aria-label="delete"
+          >
+            <DeleteIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => (window.location.href = display.link)}
+            arial-label="link"
+          >
             <LinkIcon />
           </IconButton>
         </CardActions>

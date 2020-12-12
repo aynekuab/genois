@@ -1,23 +1,33 @@
-.paper-card{
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 5px #ccc;
-    background-color: rgb(255, 178, 152);
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    margin-top: 10px;
+.paper-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  border-radius: 4px;
+  justify-content: center;
+  margin-top: 10px;
 }
-.comment-section{
-    display: flex;
-
-
+.comment-section {
+  display: flex;
+  flex-direction: column;
 }
-.comment-section > p{
+.comment-section > p {
   margin-left: 5px;
-  
 }
-.paper-card >h4{
-    margin: 0;
-    margin-top:  10px;
+.paper-card > h4 {
+  margin: 0;
+  margin-top: 15px;
+  max-height: 250px;
+}
+.email-send-container{
+   display: flex;
+   flex-direction: row;
+   max-height: 100px;
+   align-items: center;
+   justify-content: center;
+   padding: 10px;
+  
+
 }

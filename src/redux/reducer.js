@@ -9,7 +9,9 @@ const InitialState = {
 
 export default function reducer(state = InitialState, action) {
   switch (action.type) {
+    
     case Actions.LoadVideos:
+    console.log(action.payload)
       return {
         ...state,
         articles: state.articles,
@@ -26,6 +28,8 @@ export default function reducer(state = InitialState, action) {
       return {
         ...state,video: [action.payload,...state.videos]
       }
+    case Actions.UpdateLikeingVideo:
+      return state;
     default:
       return state;
   }

@@ -4,7 +4,8 @@ export const Actions = Object.freeze({
   LoadArticels: "LoadArticels",
   LoadLink: "LoadLink",
   UpdateDeletedVideo: "UpdateDeletedVideo",
-  UpdateAddingVideo:"UpdateAddingVideo"
+  UpdateAddingVideo:"UpdateAddingVideo",
+  UpdateLikeingVideo: "UpdateLikeingVideo"
 });
 
 function checkForErrors(response) {
@@ -48,7 +49,12 @@ export function UpdateAddingVideo(video){
     payload: video
   }
 }
-
+export function UpdateLikeingVideo(id){
+  return {
+    type:Actions.UpdateLikeingVideo,
+    payload: id
+  }
+}
 const hostvideo = "http://localhost:3443/videos";
 
 export function fetchVideos() {
@@ -103,4 +109,38 @@ export function addVideo(video){
         dispatch(UpdateAddingVideo(video))
       })
     }
+}
+
+export function likeVideo(id){
+  const options = {
+    method: "PATCH"
+  }
+  return(dispatch)=>{
+    fetch(`${hostvideo}/${id}`,options)
+    .then(checkForErrors)
+    .then(response => response.json)
+    .then((data)=>{
+      if(data.ok){
+        
+        dispatch(UpdateLikeingVideo(id))
+      }
+      
+    })
+  }
+}
+const hostImages = "http://localhost:3443/images";
+
+export function sendEmail(emailInfo){
+  const options = {
+    method:"POST"
+  }
+  fetch(`${hostImages}/email`)
+  .then(checkForErrors)
+  .then(response => response.json)
+  .then(data=>{
+    if(data.ok){
+      //email was sent
+    }
+
+  })
 }
