@@ -8,17 +8,19 @@ import { fetchArticles } from "../../../../redux/actions";
 export default function ArticlesCard(props) {
   const articles = useSelector((state) => state.articles);
   
-  console.log(articles)
-  const dispatch = useDispatch();
   
+  const dispatch = useDispatch();
+  console.log(articles)
   useEffect(() => {
     dispatch(fetchArticles());
-  },[]);
+  },[dispatch]);
   
   return (
     <div className="ArticlesCard-Container">
       <div className="articles-card">
-        
+      {articles.map((item) => (
+        <Article key={item.id} display={item} />
+      ))}
       </div>
       <AddCard></AddCard>
     </div>

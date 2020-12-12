@@ -12,11 +12,13 @@ import { sendEmail } from "../../../../redux/actions";
 export default function Article(props) {
   const [article, setArticle] = useState(props.display);
   
+  console.log(article)
+  
   const sendinfo = {
-    data_id: article.data_id,
+    data_id: "",
     email: "",
   };
-  
+
   const [info, setInfo] = useState(sendinfo);
   const [open, setOpen] = useState(false);
 
