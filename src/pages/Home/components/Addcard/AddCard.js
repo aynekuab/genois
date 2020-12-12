@@ -25,12 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 export default function AddCard(props) {
   const classes = useStyles();
   const  newrecord = {
     header: "",
     comment: "",
-    link: ""
+    link: "",
+    created_at: "",
+    data_id: "",
   }
 
   const [record,setRecord] = useState(newrecord);
@@ -95,7 +100,11 @@ export default function AddCard(props) {
             variant="contained"
             color="primary"
             size="medium"
-            onClick = {()=>props.add(record)}
+            onClick = {()=>{
+              props.add(record);
+              setExpand(!expand);
+              
+            }}
           >
             Add
           </Button>

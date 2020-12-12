@@ -1,0 +1,23 @@
+.paper-card{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 5px #ccc;
+    background-color: rgb(255, 178, 152);
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.comment-section{
+    display: flex;
+
+
+}
+.comment-section > p{
+  margin-left: 5px;
+  
+}
+.paper-card >h4{
+    margin: 0;
+    margin-top:  10px;
+}

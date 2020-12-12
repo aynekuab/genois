@@ -87,16 +87,16 @@ export function deleteVideo(data_id) {
 }
 
 export function addVideo(video){
-  const option = {
-    method: 'POST',
-    header: {
+  const options = {
+    method: "POST",
+    headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(video)
   };
     
     return (dispatch) =>{
-      fetch(hostvideo,option)
+      fetch(hostvideo,options)
       .then(checkForErrors)
       .then(response => response.json)
       .then((data) =>{

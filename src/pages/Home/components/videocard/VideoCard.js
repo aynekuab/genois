@@ -6,22 +6,25 @@ import { fetchVideos, deleteVideo ,addVideo } from "../../../../redux/actions";
 import AddCard from '../../components/Addcard/AddCard'
 
 export default function VideoCard(props) {
+
+  //i Dont know this wont work 
   const videos = useSelector((state) => state.videos);
   
-  
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchVideos());
-  }, [dispatch,videos]);
   
   const deleteCard = (data_id) => {
     dispatch(deleteVideo(data_id))
   }
- 
+
   const addCard = (video) => {
     dispatch(addVideo(video))
   }
+
+  useEffect(() => {
+    dispatch(fetchVideos());
+  },[dispatch]);
+  
+  
   return (
     <div className="VideoCard-Container">
       {videos.map((item) => (
