@@ -9,25 +9,33 @@ const InitialState = {
 
 export default function reducer(state = InitialState, action) {
   switch (action.type) {
-    
     case Actions.LoadVideos:
-    console.log(action.payload)
       return {
         ...state,
         articles: state.articles,
         musics: state.musics,
         videos: action.payload,
-        isLoadingvideo: false,
+        isLoadingVideo: false,
       };
+    case Actions.LoadArticels:
+      return {
+        ...state,
+        articles:action.payload,
+        isLoadingArticles:false
+      };
+
     case Actions.UpdateDeletedVideo:
       return {
         ...state,
-        videos: state.videos.filter((video) => video.data_id!== action.payload),
+        videos: state.videos.filter(
+          (video) => video.data_id !== action.payload
+        ),
       };
     case Actions.UpdateAddingVideo:
       return {
-        ...state,video: [action.payload,...state.videos]
-      }
+        ...state,
+        video: [action.payload, ...state.videos],
+      };
     case Actions.UpdateLikeingVideo:
       return state;
     default:

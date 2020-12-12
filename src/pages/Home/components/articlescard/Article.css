@@ -28,6 +28,9 @@
    align-items: center;
    justify-content: center;
    padding: 10px;
-  
 
+}
+.articles-card{
+    display: flex;
+    flex-direction: row;
 }

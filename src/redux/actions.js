@@ -4,12 +4,12 @@ export const Actions = Object.freeze({
   LoadArticels: "LoadArticels",
   LoadLink: "LoadLink",
   UpdateDeletedVideo: "UpdateDeletedVideo",
-  UpdateAddingVideo:"UpdateAddingVideo",
-  UpdateLikeingVideo: "UpdateLikeingVideo"
+  UpdateAddingVideo: "UpdateAddingVideo",
+  UpdateLikeingVideo: "UpdateLikeingVideo",
 });
 
 function checkForErrors(response) {
-  console.log(response)
+  console.log(response);
   if (!response) {
     throw Error(`${response.status}:${response.statusText}`);
   }
@@ -43,17 +43,17 @@ export function updateDeletedVideo(id) {
     payload: id,
   };
 }
-export function UpdateAddingVideo(video){
+export function UpdateAddingVideo(video) {
   return {
-    type:Actions.UpdateAddingVideo,
-    payload: video
-  }
+    type: Actions.UpdateAddingVideo,
+    payload: video,
+  };
 }
-export function UpdateLikeingVideo(id){
+export function UpdateLikeingVideo(id) {
   return {
-    type:Actions.UpdateLikeingVideo,
-    payload: id
-  }
+    type: Actions.UpdateLikeingVideo,
+    payload: id,
+  };
 }
 const hostvideo = "http://localhost:3443/videos";
 
@@ -64,7 +64,6 @@ export function fetchVideos() {
       .then((response) => response.json())
       .then((data) => {
         if (data.ok) {
-          
           dispatch(loadVideos(data.videos));
         }
       })
@@ -75,72 +74,90 @@ export function fetchVideos() {
 }
 
 export function deleteVideo(data_id) {
-  
   const option = {
-    method: "DELETE"
+    method: "DELETE",
   };
   return (dispatch) => {
     fetch(`${hostvideo}/${data_id}`, option)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
-          console.log(data_id)
-          dispatch(updateDeletedVideo(data_id));
-      }).catch(error =>{
-        console.log(error)
+        console.log(data_id);
+        dispatch(updateDeletedVideo(data_id));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 }
 
-export function addVideo(video){
+export function addVideo(video) {
   const options = {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(video)
+    body: JSON.stringify(video),
   };
-    
-    return (dispatch) =>{
-      fetch(hostvideo,options)
+
+  return (dispatch) => {
+    fetch(hostvideo, options)
       .then(checkForErrors)
-      .then(response => response.json)
-      .then((data) =>{
-        dispatch(UpdateAddingVideo(video))
+      .then((response) => response.json)
+      .then((data) => {
+        dispatch(UpdateAddingVideo(video));
+      });
+  };
+}
+
+export function likeVideo(id) {
+  const options = {
+    method: "PATCH",
+  };
+  return (dispatch) => {
+    fetch(`${hostvideo}/${id}`, options)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        if (data.ok) {
+          dispatch(UpdateLikeingVideo(id));
+        }
+      });
+  };
+}
+const hostArticles = "http://localhost:3443/articles";
+
+export function fetchArticles() {
+  const options = {
+    method: "GET",
+  };
+  return (dispatch) => {
+    fetch(hostArticles, options)
+      .then(checkForErrors)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          dispatch(loadArticels(data.articles));
+        }
       })
-    }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 }
 
-export function likeVideo(id){
+export function sendEmail(emailInfo) {
   const options = {
-    method: "PATCH"
-  }
-  return(dispatch)=>{
-    fetch(`${hostvideo}/${id}`,options)
+    method: "POST",
+  };
+  fetch(
+    `${hostArticles}/email/${emailInfo.data_id}/${emailInfo.email}`,
+    options
+  )
     .then(checkForErrors)
-    .then(response => response.json)
-    .then((data)=>{
-      if(data.ok){
-        
-        dispatch(UpdateLikeingVideo(id))
+    .then((response) => response.json)
+    .then((data) => {
+      if (data.ok) {
       }
-      
-    })
-  }
-}
-const hostImages = "http://localhost:3443/images";
-
-export function sendEmail(emailInfo){
-  const options = {
-    method:"POST"
-  }
-  fetch(`${hostImages}/email`)
-  .then(checkForErrors)
-  .then(response => response.json)
-  .then(data=>{
-    if(data.ok){
-      //email was sent
-    }
-
-  })
+    });
 }
