@@ -17,10 +17,12 @@
   margin-left: 5px;
 }
 .paper-card > h4 {
-  margin: 15px;
-  margin-left: 20px;
-  margin-right:20px;
-  max-height: 250px;
+  margin: 10px;
+}
+.paper-card{
+    margin-left: 5px;
+    margin-right:5px;
+    max-height: 250px;
 }
 .email-send-container{
    display: flex;

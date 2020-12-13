@@ -6,6 +6,7 @@ export const Actions = Object.freeze({
   UpdateDeletedVideo: "UpdateDeletedVideo",
   UpdateAddingVideo: "UpdateAddingVideo",
   UpdateLikeingVideo: "UpdateLikeingVideo",
+  UpdateAddingArticle: "UpdateAddingArticle",
 });
 
 function checkForErrors(response) {
@@ -53,6 +54,13 @@ export function UpdateLikeingVideo(id) {
   return {
     type: Actions.UpdateLikeingVideo,
     payload: id,
+  };
+}
+
+export function UpdateAddingArticle(article) {
+  return {
+    type: Actions.UpdateAddingArticle,
+    payload: article,
   };
 }
 const hostvideo = "http://localhost:3443/videos";
@@ -160,4 +168,25 @@ export function sendEmail(emailInfo) {
       if (data.ok) {
       }
     });
+}
+
+export function AddArticle(article) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(article),
+  };
+  return (dispatch) => {
+    fetch(hostArticles, options)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        if (data.ok) {
+          article.data_id = data.data_id;
+          dispatch(UpdateAddingArticle(article));
+        }
+      });
+  };
 }

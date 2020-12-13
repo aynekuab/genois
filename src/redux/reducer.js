@@ -20,8 +20,8 @@ export default function reducer(state = InitialState, action) {
     case Actions.LoadArticels:
       return {
         ...state,
-        articles:action.payload,
-        isLoadingArticles:false
+        articles: action.payload,
+        isLoadingArticles: false,
       };
 
     case Actions.UpdateDeletedVideo:
@@ -35,6 +35,11 @@ export default function reducer(state = InitialState, action) {
       return {
         ...state,
         video: [action.payload, ...state.videos],
+      };
+    case Actions.UpdateAddingArticle:
+      return {
+        ...state,
+        articles: [action.payload, ...state.articles],
       };
     case Actions.UpdateLikeingVideo:
       return state;
