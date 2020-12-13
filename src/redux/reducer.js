@@ -17,6 +17,11 @@ export default function reducer(state = InitialState, action) {
         videos: action.payload,
         isLoadingVideo: false,
       };
+    case Actions.LoadLinks:
+      console.log("hello i riched theis piht");
+      return {
+        ...state,links:action.payload
+      }
     case Actions.LoadArticels:
       return {
         ...state,
@@ -31,6 +36,13 @@ export default function reducer(state = InitialState, action) {
           (video) => video.data_id !== action.payload
         ),
       };
+    case Actions.updateDeletedLink:
+      return{
+        ...state,
+        links: state.links.filter(
+          (link) => link.data_id !== action.payload
+        ),
+      }
     case Actions.UpdateAddingVideo:
       return {
         ...state,

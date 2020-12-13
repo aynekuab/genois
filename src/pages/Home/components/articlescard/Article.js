@@ -1,5 +1,5 @@
 import "./Article.css";
-import Paper from "@material-ui/core/Paper";
+
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";

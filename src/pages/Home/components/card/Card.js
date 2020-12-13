@@ -57,7 +57,7 @@ export default function Cards(props) {
         <CardHeader
           className={classes.header}
           title={<p className={classes.title}>{display.header}</p>}
-          subheader={<p className={classes.title}>{display.created_at}</p>}
+          subheader={<p className={classes.title}>{display.created_at.substring(0,10)}</p>}
         />
 
         <CardContent className={classes.content}>

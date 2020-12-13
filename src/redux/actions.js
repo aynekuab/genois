@@ -1,12 +1,13 @@
 export const Actions = Object.freeze({
   LoadVideos: "LoadVideos",
-  LoadMusics: "LoadMusic",
   LoadArticels: "LoadArticels",
-  LoadLink: "LoadLink",
+  LoadLinks: "LoadLinks",
   UpdateDeletedVideo: "UpdateDeletedVideo",
   UpdateAddingVideo: "UpdateAddingVideo",
   UpdateLikeingVideo: "UpdateLikeingVideo",
   UpdateAddingArticle: "UpdateAddingArticle",
+  UpdateAddingLink: "UpdateAddingLink",
+  updateDeletedLink:"updateDeletedLink"
 });
 
 function checkForErrors(response) {
@@ -24,10 +25,10 @@ export function loadVideos(video) {
   };
 }
 
-export function loadMusics(music) {
+export function loadLinks(links) {
   return {
-    type: Actions.LoadMusics,
-    payload: music,
+    type: Actions.LoadLinks,
+    payload: links,
   };
 }
 
@@ -56,11 +57,23 @@ export function UpdateLikeingVideo(id) {
     payload: id,
   };
 }
-
+export function updateDeletedLink(id){
+  return {
+    type: Actions.updateDeletedLink,
+    payload: id,
+  }
+}
 export function UpdateAddingArticle(article) {
   return {
     type: Actions.UpdateAddingArticle,
     payload: article,
+  };
+}
+
+export function UpdateAddingLink(link) {
+  return {
+    type: Actions.UpdateAddingLink,
+    payload: link,
   };
 }
 const hostvideo = "http://localhost:3443/videos";
@@ -187,6 +200,65 @@ export function AddArticle(article) {
           article.data_id = data.data_id;
           dispatch(UpdateAddingArticle(article));
         }
+      });
+  };
+}
+
+const hostLinks = "http://localhost:3443/links";
+
+export function fetchLinks() {
+  return (dispatch) => {
+    fetch(hostLinks)
+      .then(checkForErrors)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          console.log(data);
+          dispatch(loadLinks(data.links));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function AddLink(link) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(link),
+  };
+
+  return (dispatch) => {
+    fetch(hostLinks, options)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        if (data.ok) {
+          link.data_id = data.data_id;
+          dispatch(UpdateAddingLink(link));
+        }
+      });
+  };
+}
+
+export function deleteLink(data_id){
+  const option = {
+    method: "DELETE",
+  };
+  return (dispatch) => {
+    fetch(`${hostvideo}/${data_id}`, option)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        console.log(data_id);
+        dispatch(updateDeletedLink(data_id));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 }
