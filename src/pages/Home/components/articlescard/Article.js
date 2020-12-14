@@ -1,5 +1,4 @@
 import "./Article.css";
-
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -10,10 +9,8 @@ import ShareIcon from "@material-ui/icons/Share";
 import Collapse from "@material-ui/core/Collapse";
 import { sendEmail } from "../../../../redux/actions";
 export default function Article(props) {
-  const [article, setArticle] = useState(props.display);
-  
-  
-  
+  const article = props.display;
+
   const sendinfo = {
     data_id: article.data_id,
     email: "",
@@ -29,7 +26,11 @@ export default function Article(props) {
         <div className="comment-section">
           <p>{article.comment}</p>
           <div className="buttons">
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                props.remove(article.data_id);
+              }}
+            >
               <DeleteIcon />
             </IconButton>
             <IconButton>
@@ -56,7 +57,7 @@ export default function Article(props) {
             <IconButton
               onClick={() => {
                 sendEmail(info);
-                setOpen(!open)
+                setOpen(!open);
               }}
             >
               <SendIcon />

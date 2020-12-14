@@ -1,12 +1,15 @@
 .Header-container{
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
+    min-width: 1000px;
+    align-items: center;
+    border-bottom: 2px solid;
+    border-color: #f99820;
 }
 .user-name-intro{
     display: flex;
     flex-direction: row;
-    width: 900px;
+    max-width: 1000px;
     justify-content: center;
    
 }
@@ -16,7 +19,8 @@
    
 }
 .welcome-text{
-    background-color: #04499e;
+    background-color: #2b68b3;
+    min-width: 1000px;
 }
 .name{
     font-family: monospace;
@@ -31,8 +35,9 @@
     margin-bottom: 0;
 }
 .user-name-intro{
-    border-bottom: 1px solid;
-    border-color: #04499e;
+   width:auto;
+
+    
 }
 .second-text{
     font-size: 1em;

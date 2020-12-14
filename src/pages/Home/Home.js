@@ -1,53 +1,55 @@
 import "./Home.css";
 import Header from "./components/header/Header";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import {useState} from 'react';
-import { Switch, Route, Link,Redirect } from "react-router-dom";
-
+import { Switch, Route, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import VideoCard from "./components/videocard/VideoCard";
 import LinkCard from "./components/linkcard/LinkCard";
-import ImageCard from "./components/imagecard/ImageCard";
-import ArticlesCard from './components/articlescard/ArticlesCard';
+
+import ArticlesCard from "./components/articlescard/ArticlesCard";
 
 export default function Home(props) {
 
+
+
+
+  //there is an easier way to this but i want to be convinced
+  
   return (
     <div className="Home-container">
       <Header></Header>
       <div className="middle-section-container">
         <div className="side-drawer-container">
-          <MenuList autoFocusItem>
-            <MenuItem  component={Link} to="/videos">
-              Videos
-            </MenuItem>
-            <MenuItem   component={Link} to="/links">
+          <div className="nav-links">
+          </div>
+          <div className="nav-links">
+            <NavLink activeClassName="selected" to="/links">
               Links
-            </MenuItem>
-            <MenuItem  component={Link} to="/images">
-              Images
-            </MenuItem>
-            <MenuItem  component={Link} to="/articles">
+            </NavLink>
+          </div>
+          <div className="nav-links">
+            <NavLink activeClassName="selected" to="/articles">
               Articles
-            </MenuItem>
-          </MenuList>
+            </NavLink>
+          </div>
+          <div className="nav-links">
+            <NavLink activeClassName="selected" to="/videos">
+              Videos
+            </NavLink>
+          </div>
         </div>
         <div className="display-section-container">
           <Switch>
-          <Redirect exact from="/" to="/videos" />
-            <Route path="/videos">
-              <VideoCard></VideoCard>
-            </Route>
+            <Redirect exact from="/" to ="/links"/>
             <Route exact path="/links">
               <LinkCard></LinkCard>
             </Route>
-            <Route exact path="/images">
-              <ImageCard></ImageCard>
-            </Route>
             <Route exact path="/articles">
-             <ArticlesCard></ArticlesCard>
+              <ArticlesCard></ArticlesCard>
             </Route>
-            <Redirect  to="/videos" />
+            <Route exact path="/videos">
+              <VideoCard></VideoCard>
+            </Route>
+            <Redirect to ="/links"/>
           </Switch>
         </div>
       </div>

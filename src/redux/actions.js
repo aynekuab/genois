@@ -7,24 +7,54 @@ export const Actions = Object.freeze({
   UpdateLikeingVideo: "UpdateLikeingVideo",
   UpdateAddingArticle: "UpdateAddingArticle",
   UpdateAddingLink: "UpdateAddingLink",
-  updateDeletedLink:"updateDeletedLink"
+  UpdateDeletedLink: "UpdateDeletedLink",
+  UpdateEditingLink: "UpdateEditingVideo",
+  updateDeletedArticle: "updateDeletedArticle",
+  StartWaiting: "StartWaiting",
+  StopWaiting: "StopWaiting",
 });
 
+export function StartWaiting() {
+  return {
+    type: Actions.StartWaiting,
+  };
+}
+export function StopWaiting() {
+  return {
+    type: Actions.StopWaiting,
+  };
+}
 function checkForErrors(response) {
   console.log(response);
   if (!response) {
+   
     throw Error(`${response.status}:${response.statusText}`);
   }
   return response;
 }
 
-export function loadVideos(video) {
+export function updateDeletedArticle(data_id) {
+  return {
+    type: Actions.updateDeletedArticle,
+    payload: data_id,
+  };
+}
+export function LoadVideos(video) {
   return {
     type: Actions.LoadVideos,
     payload: video,
   };
 }
-
+/**
+ *
+ * @param {*} card
+ */
+export function UpdateEditingLink(link) {
+  return {
+    type: Actions.LoadVideos,
+    payload: link,
+  };
+}
 export function loadLinks(links) {
   return {
     type: Actions.LoadLinks,
@@ -57,11 +87,11 @@ export function UpdateLikeingVideo(id) {
     payload: id,
   };
 }
-export function updateDeletedLink(id){
+export function UpdateDeletedLink(id) {
   return {
-    type: Actions.updateDeletedLink,
+    type: Actions.UpdateDeletedLink,
     payload: id,
-  }
+  };
 }
 export function UpdateAddingArticle(article) {
   return {
@@ -76,16 +106,19 @@ export function UpdateAddingLink(link) {
     payload: link,
   };
 }
-const hostvideo = "http://localhost:3443/videos";
+
+
+
+const live = 'https://project2.yanettrading.me:8442';
 
 export function fetchVideos() {
   return (dispatch) => {
-    fetch(hostvideo)
+    fetch(`${live}/videos`)
       .then(checkForErrors)
       .then((response) => response.json())
       .then((data) => {
         if (data.ok) {
-          dispatch(loadVideos(data.videos));
+          dispatch(LoadVideos(data.videos));
         }
       })
       .catch((error) => {
@@ -94,12 +127,14 @@ export function fetchVideos() {
   };
 }
 
+
+
 export function deleteVideo(data_id) {
   const option = {
     method: "DELETE",
   };
   return (dispatch) => {
-    fetch(`${hostvideo}/${data_id}`, option)
+    fetch(`${live}/videos/${data_id}`, option)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
@@ -122,7 +157,7 @@ export function addVideo(video) {
   };
 
   return (dispatch) => {
-    fetch(hostvideo, options)
+    fetch(`${live}/videos`, options)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
@@ -136,7 +171,7 @@ export function likeVideo(id) {
     method: "PATCH",
   };
   return (dispatch) => {
-    fetch(`${hostvideo}/${id}`, options)
+    fetch(`${live}/videos/${id}`, options)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
@@ -146,14 +181,16 @@ export function likeVideo(id) {
       });
   };
 }
-const hostArticles = "http://localhost:3443/articles";
+
+
+
 
 export function fetchArticles() {
   const options = {
     method: "GET",
   };
   return (dispatch) => {
-    fetch(hostArticles, options)
+    fetch(`${live}/articles`, options)
       .then(checkForErrors)
       .then((response) => response.json())
       .then((data) => {
@@ -172,7 +209,7 @@ export function sendEmail(emailInfo) {
     method: "POST",
   };
   fetch(
-    `${hostArticles}/email/${emailInfo.data_id}/${emailInfo.email}`,
+    `${live}/articles/email/${emailInfo.data_id}/${emailInfo.email}`,
     options
   )
     .then(checkForErrors)
@@ -182,7 +219,22 @@ export function sendEmail(emailInfo) {
       }
     });
 }
-
+export function removeArticle(data_id) {
+  const option = {
+    method: "DELETE",
+  };
+  return (dispatch) => {
+    fetch(`${live}/videos/${data_id}`, option)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        dispatch(updateDeletedArticle(data_id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
 export function AddArticle(article) {
   const options = {
     method: "POST",
@@ -192,7 +244,7 @@ export function AddArticle(article) {
     body: JSON.stringify(article),
   };
   return (dispatch) => {
-    fetch(hostArticles, options)
+    fetch(`${live}/articles`, options)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
@@ -204,11 +256,11 @@ export function AddArticle(article) {
   };
 }
 
-const hostLinks = "http://localhost:3443/links";
+
 
 export function fetchLinks() {
   return (dispatch) => {
-    fetch(hostLinks)
+    fetch(`${live}/links`)
       .then(checkForErrors)
       .then((response) => response.json())
       .then((data) => {
@@ -233,7 +285,7 @@ export function AddLink(link) {
   };
 
   return (dispatch) => {
-    fetch(hostLinks, options)
+    fetch(`${live}/links`, options)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
@@ -245,20 +297,42 @@ export function AddLink(link) {
   };
 }
 
-export function deleteLink(data_id){
+export function deleteLink(data_id) {
   const option = {
     method: "DELETE",
   };
   return (dispatch) => {
-    fetch(`${hostvideo}/${data_id}`, option)
+    fetch(`${live}/videos/${data_id}`, option)
       .then(checkForErrors)
       .then((response) => response.json)
       .then((data) => {
         console.log(data_id);
-        dispatch(updateDeletedLink(data_id));
+        dispatch(UpdateDeletedLink(data_id));
       })
       .catch((error) => {
         console.log(error);
+      });
+  };
+}
+
+export function editLink(card) {
+  console.log(card);
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(card),
+  };
+  return (dispatch) => {
+    fetch(`${live}/links/edit`, options)
+      .then(checkForErrors)
+      .then((response) => response.json)
+      .then((data) => {
+        console.log(data);
+        if (data.ok) {
+          dispatch(UpdateEditingLink(card));
+        }
       });
   };
 }

@@ -1,7 +1,7 @@
 import './ImageCard.css'
-import '../Addcard/AddCard';
 import AddCard from '../Addcard/AddCard';
-export default function (props){
+
+export default function Image (props){
   
     return(
      <div className = "ImageCard-Container">

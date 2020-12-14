@@ -9,8 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from '@material-ui/icons/Edit';
 export default function Link(props){
     
-    const [newLink,setnewLink] = useState("");
-    const [link, SetLink] = useState(props.display);
+    
+    const link  = (props.display);
     const [is_fav,setIs_fav] = useState(false);
     const [color,setColor] = useState({fill:""});
     const [open, setOpen] = useState(false);
@@ -25,7 +25,8 @@ export default function Link(props){
              <IconButton onClick={()=>{
 
                  setIs_fav(!is_fav)
-                 setColor({fill:"orange"})
+                 setColor({fill:"#db4256"})
+
              }}>
                  <FavoriteIcon style = {color}></FavoriteIcon>
              </IconButton>
@@ -46,14 +47,15 @@ export default function Link(props){
               label="new link"
               size="medium"
               fullWidth
-              onChange = { e =>{setnewLink(e.target.value)}}
+              onChange = { e =>{ link.link =  e.target.value}}
               placeholder={link.link}
             />
             <IconButton
               onClick={() => {
-                 
-                 SetLink({...link,link: newLink})
-                 props.edit(link)
+                props.edit(link)
+
+                 console.log(link)
+                
                  setOpen(!open)
               }}
             >
